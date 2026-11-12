@@ -1,0 +1,66 @@
+<h1>Componentes</h1>
+
+<form class="filtros" (ngSubmit)="cargar()">
+  <mat-form-field>
+    <mat-label>Uso</mat-label>
+    <mat-select [(ngModel)]="filtroUsoId" name="usoId" (selectionChange)="cargar()">
+      <mat-option [value]="null">Todos</mat-option>
+      @for (uso of usos(); track uso.id) {
+        <mat-option [value]="uso.id">{{ uso.nombre }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Buscar por nombre</mat-label>
+    <input matInput [(ngModel)]="filtroNombre" name="nombre" placeholder="ej. ryzen" />
+  </mat-form-field>
+
+  <div class="acciones">
+    <button mat-flat-button type="submit">Buscar</button>
+    <button mat-button type="button" (click)="limpiarFiltros()">Limpiar</button>
+  </div>
+</form>
+
+@if (cargando()) {
+  <div class="estado">
+    <mat-spinner diameter="40" />
+    <p>Cargando componentes... (si el backend estaba dormido puede tardar hasta un minuto)</p>
+  </div>
+} @else if (error()) {
+  <p class="error">{{ error() }}</p>
+} @else if (componentes().length === 0) {
+  <p>No hay componentes que coincidan con el filtro.</p>
+} @else {
+  <div class="tabla">
+    <table mat-table [dataSource]="componentes()">
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let c">{{ c.nombre }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let c">{{ c.tipo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef>Marca</th>
+        <td mat-cell *matCellDef="let c">{{ c.marca }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="precio">
+        <th mat-header-cell *matHeaderCellDef>Precio</th>
+        <td mat-cell *matCellDef="let c">{{ c.precio | currency: 'USD' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="uso">
+        <th mat-header-cell *matHeaderCellDef>Uso</th>
+        <td mat-cell *matCellDef="let c">{{ c.uso.nombre }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let fila; columns: columnas"></tr>
+    </table>
+  </div>
+}
