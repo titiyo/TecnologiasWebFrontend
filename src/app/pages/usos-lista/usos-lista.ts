@@ -1,11 +1,13 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 import { Usos } from '../../services/usos';
 import { Uso } from '../../models/uso';
 
 @Component({
-  imports: [MatTableModule, MatProgressSpinnerModule],
+  imports: [MatTableModule, MatProgressSpinnerModule, MatButtonModule, RouterLink],
   selector: 'app-usos-lista',
   styleUrl: './usos-lista.css',
   templateUrl: './usos-lista.html',
