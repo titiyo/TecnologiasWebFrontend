@@ -13,6 +13,10 @@
 } @else if (usos().length === 0) {
   <p>No hay usos cargados.</p>
 } @else {
+  @if (errorAccion()) {
+    <p class="error">{{ errorAccion() }}</p>
+  }
+
   <table mat-table [dataSource]="usos()">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -22,6 +26,14 @@
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef>Nombre</th>
       <td mat-cell *matCellDef="let uso">{{ uso.nombre }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let uso" class="acciones">
+        <a mat-button [routerLink]="['/usos', uso.id, 'editar']">Editar</a>
+        <button mat-button type="button" (click)="eliminar(uso)">Eliminar</button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnas"></tr>

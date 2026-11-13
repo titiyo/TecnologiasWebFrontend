@@ -8,4 +8,5 @@ export const routes: Routes = [
   { path: 'componentes', component: ComponentesLista },
   { path: 'usos', component: UsosLista },
   { path: 'usos/nuevo', component: UsoForm },
+  { path: 'usos/:id/editar', component: UsoForm },
 ];

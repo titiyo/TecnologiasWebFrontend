@@ -1,20 +1,24 @@
-<h1>Nuevo uso</h1>
+<h1>{{ id ? 'Editar uso' : 'Nuevo uso' }}</h1>
 
-<form #form="ngForm" (ngSubmit)="guardar()">                       <!-- 1 -->
-  <mat-form-field>
-    <mat-label>Nombre</mat-label>
-    <input matInput name="nombre" [(ngModel)]="nombre" required #campo="ngModel" />   <!-- 2 y 3 -->
-    @if (campo.invalid && campo.touched) {                          <!-- 4 -->
-      <mat-error>El nombre es obligatorio.</mat-error>
+@if (cargando()) {
+  <mat-spinner diameter="40" />
+} @else {
+  <form #form="ngForm" (ngSubmit)="guardar()">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput name="nombre" [(ngModel)]="nombre" required #campo="ngModel" />
+      @if (campo.invalid && campo.touched) {
+        <mat-error>El nombre es obligatorio.</mat-error>
+      }
+    </mat-form-field>
+
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
     }
-  </mat-form-field>
 
-  @if (error()) {
-    <p class="error">{{ error() }}</p>
-  }
-
-  <div class="acciones">
-    <button mat-flat-button type="submit" [disabled]="form.invalid || guardando()">Guardar</button>  <!-- 5 -->
-    <a mat-button routerLink="/usos">Cancelar</a>
-  </div>
-</form>
+    <div class="acciones">
+      <button mat-flat-button type="submit" [disabled]="form.invalid || guardando()">Guardar</button>
+      <a mat-button routerLink="/usos">Cancelar</a>
+    </div>
+  </form>
+}
