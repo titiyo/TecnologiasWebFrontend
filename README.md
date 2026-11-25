@@ -9,8 +9,8 @@ componentes de PC agrupados por tipo de uso.
 
 | Parte    | URL |
 | -------- | --- |
-| Frontend (Netlify) | `https://TU-APP.netlify.app` |
-| Backend (Render)   | `https://TU-BACKEND.onrender.com` |
+| Frontend (Netlify) | https://tecnologiaswebfrontend.netlify.app |
+| Backend (Render)   | https://tecnologiaswebbackend.onrender.com |
 
 > El plan gratis de Render "duerme" el backend: la primera carga puede tardar cerca de un minuto.
 > Mientras tanto la app muestra un indicador de carga.
@@ -59,6 +59,8 @@ La URL de la API sale de `src/environments/`: `environment.development.ts` (loca
 `ng serve`) y `environment.ts` (Render, usado por `ng build`).
 
 ## Deploy en Netlify
+
+Configurado desde el panel de Netlify (Build settings):
 
 - Build command: `npm run build`
 - Publish directory: `dist/front/browser`

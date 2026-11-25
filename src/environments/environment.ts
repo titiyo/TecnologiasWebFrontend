@@ -1,4 +1,4 @@
-// Producción (ng build): URL del backend en Render. Reemplazar cuando esté hecho el deploy.
+// Producción (ng build): URL del backend en Render.
 export const environment = {
-  apiUrl: 'https://TU-BACKEND.onrender.com',
+  apiUrl: 'https://tecnologiaswebbackend.onrender.com',
 };
