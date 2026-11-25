@@ -1,0 +1,8 @@
+# Configuración del deploy en Netlify (pisa lo que esté cargado en el panel).
+[build]
+  command = "npm run build"
+  publish = "dist/front/browser"
+
+[build.environment]
+  # Angular 22 necesita Node 22.12 o superior.
+  NODE_VERSION = "22"
