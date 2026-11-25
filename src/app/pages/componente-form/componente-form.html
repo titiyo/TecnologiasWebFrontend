@@ -40,7 +40,7 @@
   <mat-label>Uso</mat-label>
   <mat-select name="usoId" [(ngModel)]="usoId" required #campoUso="ngModel">   <!-- 1 -->
     @for (uso of usos(); track uso.id) {                                         <!-- 2 -->
-      <mat-option [value]="uso.id">{{ uso.uso.nombre }}</mat-option>                <!-- 3 y 4 -->
+      <mat-option [value]="uso.id">{{ .uso.nombre }}</mat-option>                <!-- 3 y 4 -->
     }
   </mat-select>
   @if (campoUso.invalid && campoUso.touched) {
