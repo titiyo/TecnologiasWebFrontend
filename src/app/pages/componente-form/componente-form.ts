@@ -66,7 +66,8 @@ export class ComponenteForm implements OnInit {
           this.tipo = componente.tipo;
           this.marca = componente.marca;
           this.precio = componente.precio;
-          this.usoId = componente.uso.id;   // 5
+          // Preselecciona el uso: el GET trae el objeto uso, el select trabaja con su id.
+          this.usoId = componente.uso.id;
           this.cargando.set(false);
         },
         error: (err: HttpErrorResponse) => {

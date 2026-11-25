@@ -41,6 +41,8 @@ export class ComponentesLista implements OnInit {
   protected error = signal('');
   // Error de una acción (ej. eliminar): se muestra arriba de la tabla sin ocultarla.
   protected errorAccion = signal('');
+  // Error al cargar los usos del filtro: no debe ocultar la tabla de componentes.
+  protected errorFiltro = signal('');
   protected columnas = ['nombre', 'tipo', 'marca', 'precio', 'uso', 'acciones'];
 
   // Valores de los filtros, enlazados con [(ngModel)].
@@ -51,7 +53,7 @@ export class ComponentesLista implements OnInit {
     // Los usos se cargan para llenar el <select> del filtro.
     this.usosService.getUsos().subscribe({
       next: (usos) => this.usos.set(usos),
-      error: () => this.error.set('No se pudieron cargar los usos para el filtro.'),
+      error: () => this.errorFiltro.set('No se pudieron cargar los usos para el filtro.'),
     });
     this.cargar();
   }

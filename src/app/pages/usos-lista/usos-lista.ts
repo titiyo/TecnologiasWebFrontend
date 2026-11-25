@@ -35,7 +35,7 @@ export class UsosLista implements OnInit {
         this.cargando.set(false);
       },
       error: () => {
-        this.error.set('Hubo un error al cargar los datos. Intenta más tarde.');
+        this.error.set('Hubo un error al cargar los datos. Intentá más tarde.');
         this.cargando.set(false);
       },
     });

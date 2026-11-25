@@ -25,6 +25,10 @@
   </div>
 </form>
 
+@if (errorFiltro()) {
+  <p class="error">{{ errorFiltro() }}</p>
+}
+
 @if (cargando()) {
   <div class="estado">
     <mat-spinner diameter="40" />

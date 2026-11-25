@@ -36,17 +36,18 @@
       }
     </mat-form-field>
 
-   <mat-form-field>
-  <mat-label>Uso</mat-label>
-  <mat-select name="usoId" [(ngModel)]="usoId" required #campoUso="ngModel">   <!-- 1 -->
-    @for (uso of usos(); track uso.id) {                                         <!-- 2 -->
-      <mat-option [value]="uso.id">{{ uso.nombre }}</mat-option>                <!-- 3 y 4 -->
-    }
-  </mat-select>
-  @if (campoUso.invalid && campoUso.touched) {
-    <mat-error>Elegí un uso.</mat-error>
-  }
-</mat-form-field>
+    <!-- Muestra el nombre de cada uso, pero guarda su id: el body pide usoId (número). -->
+    <mat-form-field>
+      <mat-label>Uso</mat-label>
+      <mat-select name="usoId" [(ngModel)]="usoId" required #campoUso="ngModel">
+        @for (uso of usos(); track uso.id) {
+          <mat-option [value]="uso.id">{{ uso.nombre }}</mat-option>
+        }
+      </mat-select>
+      @if (campoUso.invalid && campoUso.touched) {
+        <mat-error>Elegí un uso.</mat-error>
+      }
+    </mat-form-field>
 
     @if (error()) {
       <p class="error">{{ error() }}</p>

@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
 import { UsoForm } from './uso-form';
 
 describe('UsoForm', () => {
@@ -8,6 +11,8 @@ describe('UsoForm', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [UsoForm],
+      // Router y HttpClient de prueba: no hace pedidos reales al backend.
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UsoForm);
