@@ -66,6 +66,13 @@ Configurado desde el panel de Netlify (Build settings):
 - Publish directory: `dist/front/browser`
 - `public/_redirects` (`/* /index.html 200`) evita el 404 al refrescar en una ruta interna.
 
+## Historial del proceso
+
+- [`docs/resumen-claude.md`](docs/resumen-claude.md): resumen de la sesión con Claude Code
+  (decisiones, quién escribió cada pieza y checkpoints de comprensión).
+- [`docs/logs/claude-code-sesion-front.zip`](docs/logs/claude-code-sesion-front.zip): export
+  completo de la conversación.
+
 ## Autor
 
 Benjamín Tiseira — Tecnologías Web, TUARI/UNICEN.
