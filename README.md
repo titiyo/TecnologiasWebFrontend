@@ -1,59 +1,69 @@
-# Front
+# Componentes — Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.7.
+Frontend del TP de **Tecnologías Web** (TUARI/UNICEN). Aplicación en **Angular 22** con
+**Angular Material** que consume la API REST del backend
+([TecnologiasWebBackend](https://github.com/titiyo/TecnologiasWebBackend)) para administrar
+componentes de PC agrupados por tipo de uso.
 
-## Development server
+## Deploys
 
-To start a local development server, run:
+| Parte    | URL |
+| -------- | --- |
+| Frontend (Netlify) | `https://TU-APP.netlify.app` |
+| Backend (Render)   | `https://TU-BACKEND.onrender.com` |
 
-```bash
-ng serve
+> El plan gratis de Render "duerme" el backend: la primera carga puede tardar cerca de un minuto.
+> Mientras tanto la app muestra un indicador de carga.
+
+## Funcionalidades
+
+- **Usos**: listar, crear, editar y eliminar (si un uso tiene componentes, se muestra el error 409 del backend).
+- **Componentes**: listar con su uso, filtrar por uso, buscar por nombre, crear, editar y eliminar.
+  Al crear o editar, el uso se elige con un `<select>` cargado desde `GET /usos`.
+- Validación de formularios (template-driven con `ngModel`) y mensajes de error del backend en pantalla.
+- Diseño responsive.
+
+## Rutas
+
+| Ruta | Pantalla |
+| ---- | -------- |
+| `/componentes` | Lista de componentes con filtros |
+| `/componentes/nuevo` | Alta de componente |
+| `/componentes/:id/editar` | Edición de componente |
+| `/usos` | Lista de usos |
+| `/usos/nuevo` | Alta de uso |
+| `/usos/:id/editar` | Edición de uso |
+
+## Estructura
+
+```
+src/app/
+├── models/      Interfaces Uso y Componente (lo que se recibe y lo que se envía)
+├── services/    Servicios que hablan con la API (HttpClient)
+├── pages/       Pantallas: listas y formularios
+└── utils/       mensajeDeError: convierte un error HTTP en un texto legible
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Correrlo localmente
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Requiere el backend corriendo en `http://localhost:3000` (ver su README).
 
 ```bash
-ng generate component component-name
+npm install
+npx ng serve
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Abrir `http://localhost:4200`.
 
-```bash
-ng generate --help
-```
+La URL de la API sale de `src/environments/`: `environment.development.ts` (localhost, usado por
+`ng serve`) y `environment.ts` (Render, usado por `ng build`).
 
-## Building
+## Deploy en Netlify
 
-To build the project run:
+- Build command: `npm run build`
+- Publish directory: `dist/front/browser`
+- `public/_redirects` (`/* /index.html 200`) evita el 404 al refrescar en una ruta interna.
 
-```bash
-ng build
-```
+## Autor
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Benjamín Tiseira — Tecnologías Web, TUARI/UNICEN.

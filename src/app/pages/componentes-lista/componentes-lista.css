@@ -35,3 +35,16 @@
 table {
   width: 100%;
 }
+
+.encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.acciones-fila {
+  text-align: right;
+  white-space: nowrap;
+}

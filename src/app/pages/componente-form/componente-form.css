@@ -1,0 +1,14 @@
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.error {
+  color: #b3261e;
+}

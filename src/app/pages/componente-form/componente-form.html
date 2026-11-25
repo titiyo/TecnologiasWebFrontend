@@ -1,0 +1,50 @@
+<h1>{{ id ? 'Editar componente' : 'Nuevo componente' }}</h1>
+
+@if (cargando()) {
+  <mat-spinner diameter="40" />
+} @else {
+  <form #form="ngForm" (ngSubmit)="guardar()">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput name="nombre" [(ngModel)]="nombre" required #campoNombre="ngModel" />
+      @if (campoNombre.invalid && campoNombre.touched) {
+        <mat-error>El nombre es obligatorio.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tipo</mat-label>
+      <input matInput name="tipo" [(ngModel)]="tipo" required #campoTipo="ngModel" placeholder="ej. Procesador" />
+      @if (campoTipo.invalid && campoTipo.touched) {
+        <mat-error>El tipo es obligatorio.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Marca</mat-label>
+      <input matInput name="marca" [(ngModel)]="marca" required #campoMarca="ngModel" />
+      @if (campoMarca.invalid && campoMarca.touched) {
+        <mat-error>La marca es obligatoria.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Precio</mat-label>
+      <input matInput type="number" name="precio" [(ngModel)]="precio" required min="0" step="0.01" #campoPrecio="ngModel" />
+      @if (campoPrecio.invalid && campoPrecio.touched) {
+        <mat-error>El precio es obligatorio y no puede ser negativo.</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- TODO (vos): el <mat-select> del uso, enlazado a usoId. -->
+
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+
+    <div class="acciones">
+      <button mat-flat-button type="submit" [disabled]="form.invalid || guardando()">Guardar</button>
+      <a mat-button routerLink="/componentes">Cancelar</a>
+    </div>
+  </form>
+}

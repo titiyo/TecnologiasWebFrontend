@@ -1,6 +1,8 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,11 +13,13 @@ import { Componentes } from '../../services/componentes';
 import { Usos } from '../../services/usos';
 import { Componente } from '../../models/componente';
 import { Uso } from '../../models/uso';
+import { mensajeDeError } from '../../utils/mensaje-error';
 
 @Component({
   imports: [
     CurrencyPipe,
     FormsModule,
+    RouterLink,
     MatTableModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
@@ -35,7 +39,9 @@ export class ComponentesLista implements OnInit {
   protected usos = signal<Uso[]>([]);
   protected cargando = signal(true);
   protected error = signal('');
-  protected columnas = ['nombre', 'tipo', 'marca', 'precio', 'uso'];
+  // Error de una acción (ej. eliminar): se muestra arriba de la tabla sin ocultarla.
+  protected errorAccion = signal('');
+  protected columnas = ['nombre', 'tipo', 'marca', 'precio', 'uso', 'acciones'];
 
   // Valores de los filtros, enlazados con [(ngModel)].
   protected filtroUsoId: number | null = null;
@@ -72,5 +78,16 @@ export class ComponentesLista implements OnInit {
     this.filtroUsoId = null;
     this.filtroNombre = '';
     this.cargar();
+  }
+
+  protected eliminar(componente: Componente) {
+    if (!confirm(`¿Eliminar el componente "${componente.nombre}"?`)) {
+      return;
+    }
+    this.errorAccion.set('');
+    this.componentesService.eliminarComponente(componente.id).subscribe({
+      next: () => this.cargar(),
+      error: (err: HttpErrorResponse) => this.errorAccion.set(mensajeDeError(err)),
+    });
   }
 }
