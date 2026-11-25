@@ -66,7 +66,7 @@ export class ComponenteForm implements OnInit {
           this.tipo = componente.tipo;
           this.marca = componente.marca;
           this.precio = componente.precio;
-          // TODO (vos): preseleccionar el uso del componente en el <select>.
+          this.usoId = componente.uso.id;   // 5
           this.cargando.set(false);
         },
         error: (err: HttpErrorResponse) => {
